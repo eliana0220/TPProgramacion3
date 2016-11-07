@@ -2,21 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
 <head>
 
+	
+
+<!--
 <script type="text/javascript" src="/free_2013_virtuemart_2_0_22_a/templates/theme402/javascript/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/free_2013_virtuemart_2_0_22_a/templates/theme402/javascript/jquery.noconflict.js"></script>
-<base href="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/"/>
+<base href="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/"/>-->
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
 <meta name="generator" content="Joomla! - Open Source Content Management"/>
-<title>Home</title>
-<link href="/free_2013_virtuemart_2_0_22_a/index.php?format=feed&amp;type=rss" rel="alternate" type="application/rss+xml" title="RSS 2.0"/>
+
+<!-- jQuery library -->
+	<!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<script src="jquery-1.11.3.min.js"></script>
+	<script src="jquery.min.js"></script>
+
+	<!--<script type="text/javascript" src="jquery.js"></script>-->
+	<!-- FUNCIONES AJAX -->
+	<script type="text/javascript" src="FuncionesAjax.js"></script>
+
+
+
+
+<title>LOGIN</title>
+<!--<link href="/free_2013_virtuemart_2_0_22_a/index.php?format=feed&amp;type=rss" rel="alternate" type="application/rss+xml" title="RSS 2.0"/>
 <link href="/free_2013_virtuemart_2_0_22_a/index.php?format=feed&amp;type=atom" rel="alternate" type="application/atom+xml" title="Atom 1.0"/>
 <link href="/free_2013_virtuemart_2_0_22_a/templates/theme402/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 <link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/components/com_virtuemart/assets/css/facebox.css" type="text/css"/>
 <link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/media/system/css/modal.css" type="text/css"/>
-<link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/modules/mod_slideshowck/themes/default/css/camera.css" type="text/css"/>
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans" type="text/css"/>
-<link rel="stylesheet" href="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_vm_ajax_search/css/mod_vm_ajax_search.css" type="text/css"/>
+<link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/modules/mod_slideshowck/themes/default/css/camera.css" type="text/css"/>-->
+<!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans" type="text/css"/>-->
+<!--<link rel="stylesheet" href="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_vm_ajax_search/css/mod_vm_ajax_search.css" type="text/css"/>
 <link rel="stylesheet" href="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_superfish_menu/css/superfish.css" type="text/css"/>
 
 <script src="/free_2013_virtuemart_2_0_22_a/media/system/js/mootools-core.js" type="text/javascript"></script>
@@ -30,10 +47,11 @@
 <script src="/free_2013_virtuemart_2_0_22_a/modules/mod_slideshowck/assets/jquery.easing.1.3.js" type="text/javascript"></script>
 <script src="/free_2013_virtuemart_2_0_22_a/modules/mod_slideshowck/assets/camera.min.js" type="text/javascript"></script>
 <script src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_vm_ajax_search/js/vmajaxsearch.js" type="text/javascript"></script>
-<script src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_virtuemart_cart_tm/assets/vmprices2.js" type="text/javascript"></script>
-
+<script src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_virtuemart_cart_tm/assets/vmprices2.js" type="text/javascript"></script>-->
+<!--
 <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
+<!--
 <link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/templates/system/css/system.css" type="text/css"/>
 <link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/templates/theme402/css/position.css" type="text/css" media="screen,projection"/>
 <link rel="stylesheet" href="/free_2013_virtuemart_2_0_22_a/templates/theme402/css/layout.css" type="text/css" media="screen,projection"/>
@@ -45,7 +63,7 @@
 <style>.img-indent{behavior:url(/free_2013_virtuemart_2_0_22_a/templates/theme402/PIE.php);}</style>
 
 <script type="text/javascript" src="/free_2013_virtuemart_2_0_22_a/templates/theme402/javascript/script.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
 </head>
 <body class="first ">
 <div id="header">
@@ -68,8 +86,9 @@ Open Source VM2 </span></h5>-->
 
 <div id="topmenu">
 <div class="moduletable">
-<script type="text/javascript" src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_superfish_menu/js/superfish.js"></script>
-<script type="text/javascript" src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_superfish_menu/js/jquery.hoverIntent.js"></script>
+<!--
+<script type="text/javascript" src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_superfish_menu/js/superfish.js"></script>-->
+<!--<script type="text/javascript" src="http://livedemo00.template-help.com/free_2013_virtuemart_2_0_22_a/modules/mod_superfish_menu/js/jquery.hoverIntent.js"></script>-->
 <ul id="nav_top" class="sf_menu ">
 <!--
 <li class="item-444 deeper parent"><span class="Arrowdown"></span><a href="/free_2013_virtuemart_2_0_22_a/index.php/online-store">Online Store</a>
@@ -90,7 +109,35 @@ Open Source VM2 </span></h5>-->
 </div>
 </div>
 </div>
- 
+ </body>
+ <!--
+<?php
+///***********************************************************************************************///
+///COMO CLIENTE DEL SERVICIO WEB///
+///***********************************************************************************************///
+		
+//1.- INCLUIMOS LA LIBRERIA NUSOAP DENTRO DE NUESTRO ARCHIVO
+		require_once('SERVIDOR/lib/nusoap.php');
+
+//2.- INDICAMOS URL DEL WEB SERVICE
+
+		//REEMPLAZO
+		$host = 'http://localhost:8080/TPProgramacion3/SERVIDOR/ws.php';
+		
+
+//3.- CREAMOS LA INSTANCIA COMO CLIENTE
+		$client = new nusoap_client($host . '?wsdl');
+
+//3.- CHECKEAMOS POSIBLES ERRORES AL INSTANCIAR
+		$err = $client->getError();
+		if ($err) {// MOSTRAMOS EL ERROR.
+			echo '<h2>ERROR EN LA CONSTRUCCION DEL WS:</h2><pre>' . $err . '</pre>';
+			die();
+		}
+
+
+?>-->
+
 <div id="content">
 <div class="main">
 <div class="wrapper2">
@@ -100,6 +147,22 @@ Open Source VM2 </span></h5>-->
 
 <div class="module_new">
 <h3><span><span>Login</span></span></h3>
+<form method="POST">
+	<table>
+		<tr>
+			<td>USUARIO</td>
+			<td><input type="text" name="usuario" id="usuario" /></td>
+		</tr>
+		<tr>
+			<td>CONTRASEÑA</td>
+			<td><input type="password" name="clave" id="clave" /></td>
+		</tr>
+	</table>
+	Recordarme <input type="checkbox" name="recordarme" id="recordarme" /> 
+	<br><br>
+	<input type="button" name="accion" type="accion" value="Ingresar" onclick="validarLogin()" />	
+</form>
+
 </div>
 
 
