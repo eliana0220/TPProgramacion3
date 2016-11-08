@@ -1,16 +1,17 @@
 <?php 
-
+session_start();
 require_once('SERVIDOR/lib/nusoap.php');
 require_once("php/AccesoDatos.php");
 require_once("php/Login.php");
-require_once("php/Usuario.php"):
+require_once("php/Usuario.php");
+require_once("php/Estacionados.php");
+require_once("php/Importes.php");
 
 //2.- INDICAMOS URL DEL WEB SERVICE
 
 		//REEMPLAZO
-		$host = 'http://localhost:8080/TPProgramacion3/SERVIDOR/ws.php';
+		$host = 'http://vera-eliana.esy.es/SERVIDOR/ws.php';
 		
-
 //3.- CREAMOS LA INSTANCIA COMO CLIENTE
 		$client = new nusoap_client($host . '?wsdl');
 
@@ -23,32 +24,76 @@ require_once("php/Usuario.php"):
 
 
 $accion=$_POST['accion'];
-var_dump($accion);
-alert($accion);
-json_decode($_POST['usuario']);
 
 switch ($accion) 
 {
 	case 'Ingresar':
-
 			//INVOCO AL METODO DE MI WS		
-			echo $login = $client->call('ValidarUsuario', $_POST['usuario'];
+			$login = $client->call('ValidarUsuario', array("usuario" => $_POST['usuario'],"clave" => $_POST['clave']));
+			//var_dump($login);
+			$_SESSION['registrado']=$_POST['usuario'];
+			$_SESSION['tipo']=$login;
+		break;
 
-			//$login = Login:: ValidarUsuario($_POST['usuario']);
-			echo $login;
-			var_dump($login);
-			console.log($login);
-			/*$usr = new Usuario();
-			$usr->usuario=$_POST['usuario'];
-			$usr->clave=$_POST['clave'];
-			$usr->nombre=$_POST['nombre'];
-			$usr->apellido=$_POST['apellido'];
-			$usr->tipo=$_POST['tipo'];
-			$cantidad=$cd->GuardarCD();
-			echo $cantidad;*/
-		# code...
+
+	case 'setCookie':
+			if($_POST['recordarme'] == 'true')
+			{
+			   	//var_dump('vacio');
+				setcookie("usuario",$_POST['usuario'], time() + (86400 * 30), "/");
+				setcookie("clave",$_POST['clave'], time() + (86400 * 30), "/");
+			}
+		break;
+
+	case 'Estacionar':
+	    $return = $client->call('IngresarAuto', array("patente" => $_POST['patente'],"playero" => $_POST['playero']));
+	    var_dump($return);
 		break;
 	
+	case 'GrillaEstacionados':
+			$listaEstacionados = $client->call('GrillaEstacionados');
+			echo $listaEstacionados;
+		break;
+
+	case 'Sacar':
+		$return = $client->call('SacarAuto', array("patente" => $_POST['patente']));
+	    echo($return);
+		break;
+
+	case 'GrillaImportes':
+			$listaImportes = $client->call('GrillaImportes');
+			echo($listaImportes);
+		break;
+
+	case 'GrillaUsuarios':
+			$listaUsuarios = $client->call('GrillaUsuarios');
+			echo($listaUsuarios);
+			//echo $listaUsuarios;
+		break;
+
+	case 'GuardarUsuario':
+	    $return = $client->call('GuardarUsuario', array("nombre" => $_POST['nombre'],
+	    												"apellido" => $_POST['apellido'],
+	    												"tipo" => $_POST['tipo'],
+	    												"usuario" => $_POST['usuario'],
+	    												"clave" => $_POST['clave']));
+	    echo($return);
+		break;
+
+	case 'BorrarUsuario':
+		$return = $client->call('BorrarUsuario', array("usuario" => $_POST['usuario']));
+	    echo($return);
+		break;
+
+	case 'ModificarUsuario':
+		$return = $client->call('ModificarUsuario', array("usuario" => $_POST['usuario']));
+	    echo($return);
+		break;
+
+	case 'Desloguear':
+		session_destroy();
+		break;
+		
 	default:
 		# code...
 		break;

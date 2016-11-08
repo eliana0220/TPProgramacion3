@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+//session_start();
 
 require_once "Usuario.php";
 
@@ -12,42 +12,15 @@ require_once "Usuario.php";
 		public $recordar;
 
 
-		public static function ValidarUsuario($usuario)
+		public static function ValidarUsuario($usuario,$clave)
 		{
-			$usuario=$_POST['usuario'];
-			$clave=$_POST['clave'];
-			$recordar=$_POST['recordarme'];
-
-			$usr = Usuario::TraerUsuario($usuario); 
-			return $usr;
+			$consulta = Usuario::TraerUsuario($usuario,$clave);
+			$tipo = $consulta[0]['tipo'];
+			return $tipo;
 		} // cierre de función ValidarUsuario
 
 
-
-
 	} //cierre de clase
-
-
-
-
-
-	
-
-
-
-
-	/*if($recordar=="true")
-	{
-		setcookie("registro",$usuario,  time()+36000 , '/');
-		
-	}else
-	{
-		setcookie("registro",$usuario,  time()-36000 , '/');
-		
-	}
-	$_SESSION['registrado']="octavio";
-	$retorno=" ingreso";
-	echo $retorno;*/
 
 
  ?>

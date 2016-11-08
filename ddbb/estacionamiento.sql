@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2016 a las 22:48:42
+-- Tiempo de generación: 08-11-2016 a las 17:55:40
 -- Versión del servidor: 5.6.25
 -- Versión de PHP: 5.6.11
 
@@ -28,9 +28,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `estacionados` (
   `patente` varchar(6) NOT NULL,
-  `hora_ingreso` date NOT NULL,
+  `hora_ingreso` datetime NOT NULL,
   `playero` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `estacionados`
+--
+
+INSERT INTO `estacionados` (`patente`, `hora_ingreso`, `playero`) VALUES
+('AAA864', '2016-11-08 16:37:16', 'Da Silva'),
+('BBB452', '2016-11-08 16:38:58', 'Sueldo'),
+('CDR981', '2016-11-08 16:55:47', 'Sueldo'),
+('FDA761', '2016-11-08 16:56:13', 'Da Silva'),
+('LSJ039', '2016-11-08 16:56:27', 'Vera'),
+('OAK652', '2016-11-08 16:55:56', 'Vera');
 
 -- --------------------------------------------------------
 
@@ -47,6 +59,13 @@ CREATE TABLE IF NOT EXISTS `importes` (
   `playero` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `importes`
+--
+
+INSERT INTO `importes` (`patente`, `hora_ingreso`, `hora_egreso`, `tarifa`, `importe_cobrado`, `playero`) VALUES
+('AAA867', '2016-11-08 16:37:04', '2016-11-08 16:56:47', '36', '11', 'Vera');
+
 -- --------------------------------------------------------
 
 --
@@ -55,10 +74,20 @@ CREATE TABLE IF NOT EXISTS `importes` (
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `usuario` varchar(15) NOT NULL,
-  `contrasenia` int(11) NOT NULL,
-  `nombre` int(30) NOT NULL,
-  `apellido` int(30) NOT NULL
+  `clave` varchar(10) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `tipo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`usuario`, `clave`, `nombre`, `apellido`, `tipo`) VALUES
+('evera', '123', 'Eliana', 'Vera', 'admin'),
+('fdasilva', '123', 'Florencia', 'Da Silva', 'user'),
+('Nicolas', 'Sueldo', 'admin', 'nsueldo', '123');
 
 --
 -- Índices para tablas volcadas

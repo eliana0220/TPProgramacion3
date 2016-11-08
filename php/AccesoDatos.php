@@ -8,7 +8,7 @@ class AccesoDatos
     {
         try { 
             //REEMPLAZAR NOMBRE DE LA BASE DE DATOS
-            $this->objetoPDO = new PDO('mysql:host=localhost;dbname=estacionamiento;charset=utf8', 'root', '', 
+            $this->objetoPDO = new PDO('mysql:host=mysql.hostinger.com.ar;dbname=u647538537_estac;charset=utf8', 'u647538537_usr', 'inicioddbb', 
 										array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             $this->objetoPDO->exec("SET CHARACTER SET utf8");
             } 

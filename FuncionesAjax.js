@@ -1,98 +1,364 @@
 function validarLogin()
 {		
-	alert("ajax");
+
 		var usuario=document.getElementById('usuario').value;
-		var varClave=document.getElementById('clave').value;
-		var recordarme=document.getElementById('recordarme').value; //.is(':checked');
-	
-		alert("ajax");
+		var clave=document.getElementById('clave').value;
+		var recordarme=document.getElementById('recordarme').checked;
 
 		$.ajax({
 			url:"nexo.php",
-			type:"post",
+			type:"POST",
 			data:{
 				accion:"Ingresar",
 				recordarme:recordarme,
 				usuario:usuario,
-				clave:clave}
+				clave:clave},
+				success: function (response) {
+        		//Muestra tipo de Usuario
+        		//alert(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
 		})
-	.then(function(datosCorrectos){
-		alert("primero");
-	},
-	function(datos){
+	   .then(function(datosCorrectos){
+			SetCookie();
+		}
+/*		,
+		function(datos){
 		//alert("segundo");
 		console.log("segundo",datos);
-	});
+		}*/
+		);
+}
 
-	/*var funcionAjax=$.ajax({
+
+function desloguear()
+{	
+	$.ajax({
 		url:"nexo.php",
 		type:"post",
 		data:{
-			accion:"Ingresar",
-			recordarme:recordarme,
-			//usuario:varUsuario,
-			clave:varClave
-		}
-	});
-
-	funcionAjax.done(function(retorno){
-		alert(retorno);
-			/*if(retorno!="No-esta"){	
-				MostarBotones();
-				MostarLogin();
-
-				$("#BotonLogin").html("Ir a salir<br>-Sesión-");
-				$("#BotonLogin").addClass("btn btn-danger");				
-				$("#usuario").val("usuario: "+retorno);
-			}else
-			{
-				$("#informe").html("usuario o clave incorrecta");	
-				$("#formLogin").addClass("animated bounceInLeft");
-			}*/
-	/*});
-	funcionAjax.fail(function(retorno){
-		alert(retorno);
-		$("#informe").html(retorno.responseText);	
-	});	*/
+		accion:"Desloguear"},		
+			success: function (response) {
+        		$(location).attr('href', 'http://vera-eliana.esy.es/index.php');
+			}
+})
 }
 
-
-function deslogear()
+function mostrarLogin()
 {	
-	var funcionAjax=$.ajax({
-		url:"php/deslogearUsuario.php",
-		type:"post"		
-	});
-	funcionAjax.done(function(retorno){
-			MostarBotones();
-			MostarLogin();
-			$("#usuario").val("Sin usuario.");
-			$("#BotonLogin").html("Login<br>-Sesión-");
-			$("#BotonLogin").removeClass("btn-danger");
-			$("#BotonLogin").addClass("btn-primary");
-			
-	});	
+
+	var elem = document.getElementById('usuario');
+	elem.value = '';
+	var elem2 = document.getElementById('clave');
+	elem2.value = '';
+		var elem = document.getElementById('login');
+	if (elem.style.visibility == 'visible') {
+	//elem.style.visibility = 'hidden';
+}else{
+	elem.style.visibility = 'visible';
+	}
 }
 
-/*function SetCookie()
-{
-	
+function testAdmin()
+{	
+	var elem = document.getElementById('usuario');
+	elem.value = 'evera';
+	var elem2 = document.getElementById('clave');
+	elem2.value = '123';
+		var elem = document.getElementById('login');
+	if (elem.style.visibility == 'visible') {
+	//elem.style.visibility = 'hidden';
+}else{
+	elem.style.visibility = 'visible';
+	}
+}
 
-	var user = document.getElementById('usuario').value;
-	console.log(user);
+function testComun()
+{	
+	var elem = document.getElementById('usuario');
+	elem.value = 'fdasilva';
+	var elem2 = document.getElementById('clave');
+	elem2.value = '123';
+		var elem = document.getElementById('login');
+	if (elem.style.visibility == 'visible') {
+	//elem.style.visibility = 'hidden';
+}else{
+	elem.style.visibility = 'visible';
+	}
+}
+
+function SetCookie()
+{
+	var usuario=document.getElementById('usuario').value;
+	var clave=document.getElementById('clave').value;
+	var recordarme=document.getElementById('recordarme').checked;
+
 	$.ajax({
-		url :"nexo.php",
-		type : "post",
-		data: { queHacer:"setCookie",
-				usuario : user}
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"setCookie",
+				recordarme:recordarme,
+				usuario:usuario,
+				clave:clave},
+				success: function (response) {
+        		$(location).attr('href', 'http://vera-eliana.esy.es/pagina_estacionados.php');
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
 		})
 	.then(function si(exito)
 	{	
-		alert("ajax");
+		/*alert("ajax");
+		$("#eli").html(exito);*/
+	},
+	function no(error)
+	{
+		//alert("ERROR!");
+	});
+}
+
+function estacionar()
+{		
+		var patente=document.getElementById('patente').value;
+		var playero=document.getElementById('playero').value;
+
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"Estacionar",
+				patente:patente,
+				playero:playero},
+				success: function (response) {
+        		//alert(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+			grillaEstacionados();
+		},
+		function(datos){
+		//alert("segundo");
+		console.log("segundo",datos);
+		});
+}
+
+function grillaEstacionados()
+{		
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"GrillaEstacionados"},
+				success: function (data) {
+				 //alert(data);	
+				 $('#grillaEstacionados').empty();
+        		 $('#grillaEstacionados').append(data);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+		});
+		
+}
+
+function sacar()
+{		
+		var patente=document.getElementById('patente').value;
+
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"Sacar",
+				patente:patente},
+				success: function (data) {
+				//alert(data);
+        		$('#divPrecio').empty();
+        		$('#divPrecio').append(data);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+			grillaEstacionados();
+		},
+		function(datos){
+		//alert("segundo");
+		console.log("segundo",datos);
+		});
+}
+
+function grillaImportes()
+{		
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"GrillaImportes"},
+				success: function (data) {
+				 //alert(data);	
+				 $('#grillaImportes').empty();
+        		 $('#grillaImportes').append(data);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+		});
+}
+
+/*function paginaImportes()
+{
+	$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"PaginaImportes"},
+				success: function (response) {
+        		$(location).attr('href', 'http://localhost:8080/TPProgramacion3/pagina_importes.php');
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	.then(function si(exito)
+	{	
+		/*alert("ajax");
 		$("#eli").html(exito);
 	},
 	function no(error)
 	{
-		alert("ERROR!");
+		//alert("ERROR!");
 	});
 }*/
+
+function grillaUsuarios()
+{		
+		//alert('gri');
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"GrillaUsuarios"},
+				success: function (data) {
+				 //alert(data);	
+				 $('#grillaUsuarios').empty();
+        		 $('#grillaUsuarios').append(data);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+		});
+}
+
+
+function guardarUsuario()
+{		
+
+		var nombre=document.getElementById('nombre').value;
+		var apellido=document.getElementById('apellido').value;
+		var tipo=document.getElementById('tipo').value;
+		var usuario=document.getElementById('usuario').value;
+		var clave=document.getElementById('clave').value;
+
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"GuardarUsuario",
+				nombre:nombre,
+				apellido:apellido,
+				tipo:tipo,
+				usuario:usuario,
+				clave:clave},
+				success: function (response) {
+        		//alert(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+			grillaUsuarios();
+		},
+		function(datos){
+		//alert("segundo");
+		console.log("segundo",datos);
+		});
+}
+
+
+function BorrarUsuario(usuario)
+{		
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"BorrarUsuario",
+				usuario:usuario},
+				success: function (response) {
+        		//alert(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+			grillaUsuarios();
+		},
+		function(datos){
+		//alert("segundo");
+		console.log("segundo",datos);
+		});
+}
+
+function ModificarUsuario()
+{		
+
+		var usuario=document.getElementById('usuario').value;
+
+		$.ajax({
+			url:"nexo.php",
+			type:"POST",
+			data:{
+				accion:"ModificarUsuario",
+				usuario:usuario},
+				success: function (response) {
+        		alert(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+      }
+		})
+	   .then(function(datosCorrectos){
+			grillaUsuarios();
+		},
+		function(datos){
+		//alert("segundo");
+		console.log("segundo",datos);
+		});
+}

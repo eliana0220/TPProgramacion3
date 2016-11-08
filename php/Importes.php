@@ -16,7 +16,7 @@
 			# code...
 		}*/
 
-		public static function calcula_tiempo($start_time, $end_time) 
+		/*public static function calcula_tiempo($start_time, $end_time) 
 		{ 
     		$total_seconds 		= strtotime($end_time) - strtotime($start_time); 
     		$horas              = floor ( $total_seconds / 3600 );
@@ -30,7 +30,7 @@
     		$time               = implode( ':', $time );
      
     		return $time;
-		}
+		}*/
 
 		public static function TraerListaImportes()
 		{
@@ -39,12 +39,14 @@
 																importe_cobrado, playero 
 																from importes ");
 				$consulta->execute();
-				return $consulta;
-		} //cierre función TraerListaAutos
+				$lista = $consulta->fetchAll();
+				return $lista;
+		} //cierre función TraerListaImportes
 
 		public static function GrillaImportes()
 		{
 			$listaImportes = Importes:: TraerListaImportes();
+
 
 			$grilla = '<table class="table">
 							<tr>
@@ -58,22 +60,15 @@
 
 			foreach ($listaImportes as $a)
 			{
-				$auto = array();
-				$auto["patente"] = $a->patente;
-				$auto["hora_ingreso"] = $a->hora_ingreso;
-				$auto["hora_egreso"] = $a->hora_egreso;
-				$auto["tarifa"] = $a->tarifa;
-				$auto["importe_cobrado"] = $a->importe_cobrado;
-				$auto["playero"] = $a->playero;
-				$auto = json_encode($auto);
+				
 		
 				$grilla .= "<tr>
-								<td>".$a->patente.          "</td>
-								<td>".$a->hora_ingreso.     "</td>
-								<td>".$a->hora_egreso.		"</td>
-								<td>".$a->tarifa.	        "</td>
-								<td>".$a->importe_cobrado.  "</td>
-								<td>".$a->playero.  	    "</td>
+								<td>".$a["patente"].          "</td>
+								<td>".$a["hora_ingreso"].     "</td>
+								<td>".$a["hora_egreso"].		"</td>
+								<td>".$a["tarifa"].	        "</td>
+								<td>".$a["importe_cobrado"].  "</td>
+								<td>".$a["playero"].  	    "</td>
 							</tr>";
 			}
 		
@@ -83,21 +78,19 @@
 
 		} //cierre función GrillaImportes
 
-		public static function Cobrar($auto)
+		public static function AgregarImporte($patente, $hora_ingreso, $hora_egreso, $tarifa, $importe_cobrado, $playero)
 		{
-			$hoy = getdate();
-			if (strlen($hoy['mon'])<2) 
-			{
-				$hoy['mon'] = "0".$hoy['mon'];
-			}
-			if (strlen($hoy['mday'])<2) 
-			{
-				$hoy['mday'] = "0".$hoy['mday'];
-			}
-
-			$hora_egreso = $hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
-			
-		}
+			$insert = "insert importes values ( "."'".$patente."'".","
+													."'".$hora_ingreso."'".","
+													."'".$hora_egreso."'".","
+													."'".$tarifa."'".","
+													."'".$importe_cobrado."'".","
+													."'".$playero."'".")";
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta($insert);
+			$consulta->execute();
+			return $consulta;
+		} //cierre función AgregarImporte
 
 
 

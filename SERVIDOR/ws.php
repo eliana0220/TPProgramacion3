@@ -3,16 +3,17 @@
 	require_once('../php/AccesoDatos.php');
 	require_once('../php/Login.php');
 	require_once('../php/Usuario.php');
+	require_once('../php/Estacionados.php');
+	require_once('../php/Importes.php');
 	
-	$server = new nusoap_server(); 
 
-	$server->configureWSDL('WebService Con PDO', 'urn:wsPdo'); 
+
+	//$server->configureWSDL('WebService Con PDO', 'urn:wsPdo'); 
 
 ///**********************************************************************************************************///								
 //REGISTRO METODO SIN PARAMETRO DE ENTRADA Y PARAMETRO DE SALIDA 'ARRAY de ARRAYS'
 
   
-	//$server->register( 
 	/*'ObtenerTodosLosCds',                	
 						array(),  
 						array('return' => 'xsd:Array'),   
@@ -21,25 +22,67 @@
 						'rpc',                        		
 						'encoded',                    		
 						'Obtiene todos los Cds de la Base de Datos'    	
-					);
+					;*/
 
 
-	function ObtenerTodosLosCds() {
-		
-		return Cd::TraerTodos(); } */
+	function ValidarUsuario($usuario, $clave)
+	{	
+		return Login::ValidarUsuario($usuario,$clave); 
+	}
 
-	//function ValidarUsuario($usuario)
-	//{
-	//	return Login::ValidarUsuario($usuario);
-	//}
-		
-		var_dump("llegue al WS");
-		echo "llegue al WS";
-		return "llegue al WS";
-		//$server->register("ValidarUsuario")
-		
+	function GrillaEstacionados()
+	{	
+		//return Estacionados:: TraerListaAutos();
+		return Estacionados:: GrillaEstacionados(); 
+	}
+
+	function IngresarAuto($patente, $playero)
+	{	
+		return Estacionados::IngresarAuto($patente, $playero); 
+	}
+
+	function SacarAuto($patente)
+	{	
+		return Estacionados::SacarAuto($patente);
+	}
+	
+	function GrillaImportes()
+	{	
+		return Importes:: GrillaImportes(); 
+	}	
+
+	function GrillaUsuarios()
+	{	
+		return Usuario:: GrillaUsuarios(); 
+	}		
+
+	function GuardarUsuario($nombre, $apellido, $tipo, $usuario, $clave)
+	{	
+		return Usuario::GuardarUsuario($nombre, $apellido, $tipo, $usuario, $clave); 
+	}
+
+	function BorrarUsuario($usuario)
+	{	
+		return Usuario::BorrarUsuario($usuario);
+	}
+
+	function ModificarUsuario($usuario)
+	{	
+		return Usuario::ModificarUsuario($usuario);
+	}
 	
 ///**********************************************************************************************************///								
 
-	$HTTP_RAW_POST_DATA = file_get_contents("php://input");	
+	//$HTTP_RAW_POST_DATA = file_get_contents("php://input");	
+    $server = new nusoap_server(); 
+	$server->register("ValidarUsuario");
+	$server->register("IngresarAuto");
+	$server->register("GrillaEstacionados");
+	$server->register("SacarAuto");
+	$server->register("GrillaImportes");
+	$server->register("GrillaUsuarios");
+	$server->register("GuardarUsuario");
+	$server->register("BorrarUsuario");
+	$server->register("ModificarUsuario");
 	$server->service($HTTP_RAW_POST_DATA);
+?>
